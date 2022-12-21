@@ -1,4 +1,5 @@
 #!/bin/sh
+mkdir done 2> /dev/null
 next=$((`ls done | sort -n -r | head -1` + 1))
 
 echo "next: day $next"
