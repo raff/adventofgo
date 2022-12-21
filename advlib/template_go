@@ -1,0 +1,16 @@
+package main
+
+import (
+        "fmt"
+
+        "./advlib"
+)
+
+func main() {
+	r := advlib.NewReader()
+        lines, _ := r.Readlines()
+
+	for _, line := range lines {
+		fmt.Println(advlib.Split(line))
+	}
+}
