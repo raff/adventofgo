@@ -78,6 +78,15 @@ func Split(s string) []string {
 	return strings.Fields(s)
 }
 
+func Split2(s string) (string, string) {
+	parts := strings.Fields(s)
+	if len(parts) != 2 {
+		panic("Split2 " + s)
+	}
+
+	return parts[0], parts[1]
+}
+
 func SplitSep(s, sep string) []string {
 	return strings.Split(s, sep)
 }

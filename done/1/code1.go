@@ -1,77 +1,122 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"sort"
-	"strconv"
+	"strings"
+
+	"github.com/raff/advent2022/advlib"
 )
 
-type Reader struct {
-	sc  *bufio.Scanner
-	err error
-}
+func getnum(l string, first bool) (n int) {
 
-func NewReader() *Reader {
-	return &Reader{sc: bufio.NewScanner(os.Stdin)}
-}
+	for len(l) > 0 {
+		switch {
+		case l[0] == '1':
+			n = 1
+			l = l[1:]
 
-func (r *Reader) Readline() (string, error) {
-	if r.err != nil {
-		return "", r.err
+		case strings.HasPrefix(l, "one"):
+			n = 1
+			l = l[2:] // (e)ight
+
+		case l[0] == '2':
+			n = 2
+			l = l[1:]
+
+		case strings.HasPrefix(l, "two"):
+			n = 2
+			l = l[2:] // (o)ne
+
+		case l[0] == '3':
+			n = 3
+			l = l[1:]
+
+		case strings.HasPrefix(l, "three"):
+			n = 3
+			l = l[2:] // (e)ight
+
+		case l[0] == '4':
+			n = 4
+			l = l[1:]
+
+		case strings.HasPrefix(l, "four"):
+			n = 4
+			l = l[4:]
+
+		case l[0] == '5':
+			n = 5
+			l = l[1:]
+
+		case strings.HasPrefix(l, "five"):
+			n = 5
+			l = l[3:] // (e)ight
+
+		case l[0] == '6':
+			n = 6
+			l = l[1:]
+
+		case strings.HasPrefix(l, "six"):
+			n = 6
+			l = l[3:]
+
+		case l[0] == '7':
+			n = 7
+			l = l[1:]
+
+		case strings.HasPrefix(l, "seven"):
+			n = 7
+			l = l[4:] // (n)ine
+
+		case l[0] == '8':
+			n = 8
+			l = l[1:]
+
+		case strings.HasPrefix(l, "eight"):
+			n = 8
+			l = l[4:] // (t)wo or (t)hree
+
+		case l[0] == '9':
+			n = 9
+			l = l[1:]
+
+		case strings.HasPrefix(l, "nine"):
+			n = 9
+			l = l[3:] // (e)ight
+
+		default:
+			l = l[1:]
+			continue
+		}
+
+		//fmt.Printf("n: %v line: %q\n", n, l)
+
+		if first {
+			return n
+		}
 	}
 
-	if r.sc.Scan() {
-		return r.sc.Text(), nil
-	}
-
-	r.err = r.sc.Err()
-	if r.err == nil {
-		r.err = io.EOF
-	}
-
-	r.sc = nil
-	return "", r.err
-}
-
-func ParseInt(s string) int {
-	v, _ := strconv.Atoi(s)
-	return v
+	return n
 }
 
 func main() {
-	r := NewReader()
+	r := advlib.NewReader()
+	lines, _ := r.Readlines()
 
-	var cals []int
-	var curr int
+	total := 0
 
-	for {
-		line, err := r.Readline()
-		if err == io.EOF {
-			if curr > 0 {
-				cals = append(cals, curr)
-			}
+	for _, line := range lines {
+		first := getnum(line, true)
+		last := getnum(line, false)
 
-			break
-		}
-
-		if err != nil {
-			fmt.Println("ERROR", err)
+		if first < 0 || last < 0 {
+			fmt.Println("invalid input:", line)
 			return
 		}
 
-		if line == "" {
-			cals = append(cals, curr)
-			curr = 0
-		} else {
-			curr += ParseInt(line)
-		}
+		n := first*10 + last
+		fmt.Println(line, "-", n)
+		total += n
 	}
 
-	fmt.Println("Data:", cals)
-	sort.Sort(sort.Reverse(sort.IntSlice(cals)))
-	fmt.Println("Sorted:", cals)
-	fmt.Println("max", cals[0], cals[1], cals[2], "=>", cals[0]+cals[1]+cals[2])
+	fmt.Println("total:", total)
 }

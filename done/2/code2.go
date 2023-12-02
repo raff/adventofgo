@@ -1,148 +1,62 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"os"
-	"strconv"
-	"strings"
-)
 
-type Reader struct {
-	sc  *bufio.Scanner
-	err error
-}
-
-func NewReader() *Reader {
-	return &Reader{sc: bufio.NewScanner(os.Stdin)}
-}
-
-func (r *Reader) Readline() (string, error) {
-	if r.err != nil {
-		return "", r.err
-	}
-
-	if r.sc.Scan() {
-		return r.sc.Text(), nil
-	}
-
-	r.err = r.sc.Err()
-	if r.err == nil {
-		r.err = io.EOF
-	}
-
-	r.sc = nil
-	return "", r.err
-}
-
-func (r *Reader) Readlines() ([]string, error) {
-	var lines []string
-
-	for {
-		line, err := r.Readline()
-		if err == io.EOF {
-			break
-		}
-
-		if err != nil {
-			fmt.Println("ERROR", err)
-			return nil, err
-		}
-
-		lines = append(lines, line)
-	}
-
-	return lines, nil
-}
-
-func ParseInt(s string) int {
-	v, _ := strconv.Atoi(s)
-	return v
-}
-
-const (
-	Lose = 0
-	Draw = 3
-	Win  = 6
+	. "github.com/raff/advent2022/advlib"
 )
 
 var (
-	// part 1
-	shapes = map[string]int{
-		"X": 1, // rock
-		"Y": 2, // paper
-		"Z": 3, // scissor
-	}
-
-	scores = map[string]int{
-		"XA": Draw, // rock, rock
-		"XB": Lose, // rock, paper
-		"XC": Win,  // rock, scissor
-		"YA": Win,  // paper, rock
-		"YB": Draw, // paper, paper
-		"YC": Lose, // paper, scissor
-		"ZA": Lose, // scissor, rock
-		"ZB": Win,  // scissor, paper
-		"ZC": Draw, // scissor, scissor
-	}
-
-	// part 2
-	results = map[string]int{
-		"X": Lose,
-		"Y": Draw,
-		"Z": Win,
-	}
-
-	choices = map[string]string{
-		"AX": "Z", // lose, scissor
-		"AY": "X", // draw, rock
-		"AZ": "Y", // win, paper
-		"BX": "X", // lose, rock
-		"BY": "Y", // draw, paper
-		"BZ": "Z", // win, scissor
-		"CX": "Y", // lose, paper
-		"CY": "Z", // draw, scissor
-		"CZ": "X", // win, rock
+	max = map[string]int{
+		"red":   12,
+		"green": 13,
+		"blue":  14,
 	}
 )
 
 func main() {
 	r := NewReader()
-
-	lines, err := r.Readlines()
-	if err != nil {
-		fmt.Println("ERROR", err)
-		return
-	}
-
-	// part 1
+	lines, _ := r.Readlines()
 
 	total := 0
 
+	//next_line:								; part 1
 	for _, line := range lines {
-		parts := strings.Fields(line)
-		fmt.Println(parts)
+		parts := SplitSep(line, ": ")
 
-		sc := parts[1] + parts[0]
-		total += shapes[parts[1]] + scores[sc]
+		_, game := Split2(parts[0])
+		subs := SplitSep(parts[1], "; ")
+
+		min := map[string]int{}
+
+		for _, s := range subs {
+			for _, c := range SplitSep(s, ", ") {
+				n, color := Split2(c)
+				in := ParseInt(n)
+				/*						; part 1
+				if in > max[color] {
+					fmt.Println("skip game", game)
+					continue next_line
+				}
+				*/
+				if min[color] < in {
+					min[color] = in
+				}
+			}
+		}
+
+		//fmt.Println(game, min)					; part 1
+		//total += ParseInt(game)
+
+		p := 1
+		for _, v := range min {
+			p *= v
+		}
+
+		fmt.Println(game, p)
+		total += p
 	}
 
-	fmt.Println("A:", total)
-
-	// part 2
-	total = 0
-
-	for _, line := range lines {
-		parts := strings.Fields(line)
-
-		sc := parts[0] + parts[1]
-		c := choices[sc]
-
-		fmt.Println(parts, shapes[c], choices[sc], results[parts[1]])
-
-		total += shapes[c] + results[parts[1]]
-	}
-
-	fmt.Println("B:", total)
+	fmt.Println()
+	fmt.Println("total", total)
 }
