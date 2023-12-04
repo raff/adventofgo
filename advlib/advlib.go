@@ -91,6 +91,10 @@ func SplitSep(s, sep string) []string {
 	return strings.Split(s, sep)
 }
 
+func Join(parts []string, sep string) string {
+        return strings.Join(parts, sep)
+}
+
 func StartsWith(s, start string) bool {
         return strings.HasPrefix(s, start)
 }
