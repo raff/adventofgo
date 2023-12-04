@@ -3,14 +3,18 @@ package main
 import (
         "fmt"
 
-        "github.com/raff/advent2022/advlib"
+        . "github.com/raff/advent2022/advlib"
 )
 
 func main() {
-	r := advlib.NewReader()
+	r := NewReader()
         lines, _ := r.Readlines()
 
+        if Part2 {
+                fmt.Println("part 2")
+        }
+
 	for _, line := range lines {
-		fmt.Println(advlib.Split(line))
+		fmt.Println(Split(line))
 	}
 }

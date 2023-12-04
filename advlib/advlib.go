@@ -2,12 +2,20 @@ package advlib
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"os"
 	"strconv"
 	"strings"
 )
+
+var Part2 bool
+
+func init() {
+	flag.BoolVar(&Part2, "2", Part2, "part 2")
+	flag.Parse()
+}
 
 type Reader struct {
 	sc  *bufio.Scanner
@@ -50,7 +58,7 @@ func (r *Reader) Readlines() ([]string, error) {
 			return nil, err
 		}
 
-                lines = append(lines, line)
+		lines = append(lines, line)
 	}
 
 	return lines, nil
@@ -62,16 +70,16 @@ func ParseInt(s string) int {
 }
 
 func ParseIntTrim(s, t string) int {
-        v, _ := strconv.Atoi(strings.TrimRight(s, t))
+	v, _ := strconv.Atoi(strings.TrimRight(s, t))
 	return v
 }
 
 func ToInts(ls []string) (li []int) {
-        for _, s := range ls {
-            li = append(li, ParseIntTrim(s, ","))
-        }
+	for _, s := range ls {
+		li = append(li, ParseIntTrim(s, ","))
+	}
 
-        return li
+	return li
 }
 
 func Split(s string) []string {
@@ -92,13 +100,13 @@ func SplitSep(s, sep string) []string {
 }
 
 func Join(parts []string, sep string) string {
-        return strings.Join(parts, sep)
+	return strings.Join(parts, sep)
 }
 
 func StartsWith(s, start string) bool {
-        return strings.HasPrefix(s, start)
+	return strings.HasPrefix(s, start)
 }
 
 func ContainsChar(s string, c rune) bool {
-    return strings.Contains(s, string(c))
+	return strings.Contains(s, string(c))
 }
