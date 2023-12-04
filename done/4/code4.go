@@ -67,7 +67,7 @@ func main() {
 	i := 0
 
 	for {
-		if i > len(cards) {
+		if i >= len(cards) {
 			break
 		}
 
@@ -87,5 +87,6 @@ func main() {
 		i++
 	}
 
+	fmt.Println()
 	fmt.Println("total cards:", len(cards))
 }
