@@ -11,9 +11,11 @@ import (
 )
 
 var Part2 bool
+var Verbose bool
 
 func init() {
 	flag.BoolVar(&Part2, "2", Part2, "part 2")
+	flag.BoolVar(&Verbose, "verbose", Verbose, "verbose mode")
 	flag.Parse()
 }
 
@@ -105,6 +107,10 @@ func Join(parts []string, sep string) string {
 
 func StartsWith(s, start string) bool {
 	return strings.HasPrefix(s, start)
+}
+
+func EndsWith(s, end string) bool {
+	return strings.HasSuffix(s, end)
 }
 
 func ContainsChar(s string, c rune) bool {
