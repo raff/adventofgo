@@ -26,7 +26,7 @@ if [[ "$1" == "" ]]; then
 
     ls -l *.*
 
-elif [[ "$1" == "$year" ]]; then
+elif [[ "$1" == "done" ]]; then
     mkdir $year/$next
 
     if [[ $? == 0 ]]; then
