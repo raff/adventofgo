@@ -11,12 +11,15 @@ import (
 )
 
 var Part2 bool
+var Part1 bool
 var Verbose bool
 
 func init() {
 	flag.BoolVar(&Part2, "2", Part2, "part 2")
 	flag.BoolVar(&Verbose, "verbose", Verbose, "verbose mode")
 	flag.Parse()
+
+	Part1 = !Part2
 }
 
 type Reader struct {
@@ -67,21 +70,25 @@ func (r *Reader) Readlines() ([]string, error) {
 }
 
 func ParseInt(s string) int {
-	v, _ := strconv.Atoi(s)
+	v, _ := strconv.Atoi(strings.TrimSpace(s))
 	return v
 }
 
 func ParseIntTrim(s, t string) int {
-	v, _ := strconv.Atoi(strings.TrimRight(s, t))
+	v, _ := strconv.Atoi(strings.Trim(s, t))
 	return v
 }
 
 func ToInts(ls []string) (li []int) {
 	for _, s := range ls {
-		li = append(li, ParseIntTrim(s, ","))
+		li = append(li, ParseIntTrim(s, ", "))
 	}
 
 	return li
+}
+
+func Replace(s, v1, v2 string) string {
+	return strings.ReplaceAll(s, v1, v2)
 }
 
 func Split(s string) []string {
