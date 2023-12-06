@@ -1,7 +1,12 @@
 #!/bin/sh
-mkdir done 2> /dev/null
-next=$((`ls done | sort -n -r | head -1` + 1))
+year=${YEAR:-`date "+%Y"`}
+if [[ ! -d $year ]]; then
+	mkdir $year 2> /dev/null
+fi
 
+next=$((`ls $year | sort -n -r | head -1` + 1))
+
+echo "year: $year"
 echo "next: day $next"
 echo
 
@@ -21,12 +26,12 @@ if [[ "$1" == "" ]]; then
 
     ls -l *.*
 
-elif [[ "$1" == "done" ]]; then
-    mkdir done/$next
+elif [[ "$1" == "$year" ]]; then
+    mkdir $year/$next
 
     if [[ $? == 0 ]]; then
-        mv $code $data $test done/$next
-        ls -l done
+        mv $code $data $test $year/$next
+        ls -l $year
     fi
 
 else
