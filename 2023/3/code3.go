@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gobs/matrix"
-	. "github.com/raff/advent2022/advlib"
+	. "github.com/raff/adventofgo/advlib"
 )
 
 func main() {

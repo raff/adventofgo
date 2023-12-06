@@ -76,11 +76,11 @@ type Monkey struct {
 }
 
 func (m *Monkey) Reset() {
-        m.Items = make([]uint64, len(m.Initial))
+	m.Items = make([]uint64, len(m.Initial))
 
-        for i, v := range m.Initial {
-            m.Items[i] = uint64(v)
-        }
+	for i, v := range m.Initial {
+		m.Items[i] = uint64(v)
+	}
 
 	m.Inspected = 0
 }
@@ -203,7 +203,7 @@ func main() {
 						level /= 3
 					}
 					d := monkey.DestTrue
-					if int(level) % monkey.TestDiv != 0 {
+					if int(level)%monkey.TestDiv != 0 {
 						d = monkey.DestFalse
 					}
 					monkeys[d].Items = append(monkeys[d].Items, level)

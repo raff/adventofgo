@@ -65,12 +65,12 @@ func score(x, y int) int {
 	// calculate right
 	{
 		s := 0
-                for xx := x - 1; xx >= 0; xx-- {
-                    s++
+		for xx := x - 1; xx >= 0; xx-- {
+			s++
 
-                    if trees[y][xx] >= h {
-                        break
-                    }
+			if trees[y][xx] >= h {
+				break
+			}
 		}
 
 		vs *= s
@@ -78,14 +78,14 @@ func score(x, y int) int {
 
 	// calculate left
 	{
-	        l := len(trees[y])
+		l := len(trees[y])
 		s := 0
-                for xx := x + 1; xx < l; xx++ {
-                    s++
+		for xx := x + 1; xx < l; xx++ {
+			s++
 
-		    if trees[y][xx] >= h {
-			break
-                    }
+			if trees[y][xx] >= h {
+				break
+			}
 		}
 
 		vs *= s
@@ -97,9 +97,9 @@ func score(x, y int) int {
 		for yy := y - 1; yy >= 0; yy-- {
 			s++
 
-                        if trees[yy][x] >= h {
-                            break
-                        }
+			if trees[yy][x] >= h {
+				break
+			}
 		}
 
 		vs *= s
@@ -107,14 +107,14 @@ func score(x, y int) int {
 
 	// calculate left
 	{
-	        l := len(trees)
+		l := len(trees)
 		s := 0
 		for yy := y + 1; yy < l; yy++ {
 			s++
 
-                        if trees[yy][x] >= h {
-                            break
-                        }
+			if trees[yy][x] >= h {
+				break
+			}
 		}
 
 		vs *= s

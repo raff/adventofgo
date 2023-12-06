@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	. "github.com/raff/advent2022/advlib"
+	. "github.com/raff/adventofgo/advlib"
 )
 
 type Mapping struct {

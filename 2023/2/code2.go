@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	. "github.com/raff/advent2022/advlib"
+	. "github.com/raff/adventofgo/advlib"
 )
 
 var (

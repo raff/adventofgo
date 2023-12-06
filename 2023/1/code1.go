@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/raff/advent2022/advlib"
+	"github.com/raff/adventofgo/advlib"
 )
 
 func getnum(l string, first bool) (n int) {

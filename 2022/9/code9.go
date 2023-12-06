@@ -15,13 +15,13 @@ type Grid struct {
 func NewGrid(w, h int) (g Grid) {
 	g.width = w
 	g.height = h
-        g.content = make([]byte, w * h)
-        return g
+	g.content = make([]byte, w*h)
+	return g
 }
 
 func (g Grid) Reset(c byte) {
-        for i := range g.content {
-                    g.content[i] = c
+	for i := range g.content {
+		g.content[i] = c
 	}
 }
 
@@ -73,10 +73,10 @@ func (t *Tail) Add(p Pos) bool {
 
 	if l >= t.max {
 		t.list = t.list[l-t.max:]
-                return true
+		return true
 	}
 
-        return false
+	return false
 }
 
 func (t *Tail) First() Pos {
@@ -93,14 +93,14 @@ func main() {
 	lines, _ := r.Readlines()
 
 	//grid := NewGrid(500, 800)
-        grid := NewGrid(40, 40)
-        ltail := NewTail(9)
+	grid := NewGrid(40, 40)
+	ltail := NewTail(9)
 
 	for part := 2; part <= 2; part++ {
-	        grid.Reset('.')
+		grid.Reset('.')
 
-                h := Pos{0, 0}
-                t := Pos{0, 0}
+		h := Pos{0, 0}
+		t := Pos{0, 0}
 
 		for _, line := range lines {
 			parts := advlib.Split(line)
@@ -139,18 +139,18 @@ func main() {
 
 				fmt.Printf("H:%d,%d, T:%d,%d\n", h.x, h.y, t.x, t.y)
 
-                                if part == 1 {
-				        grid.Set(t.x, t.y, '#')
-                                } else if ltail.Add(t) {
-                                        last := ltail.Last()
-				        grid.Set(last.x, last.y, '#')
+				if part == 1 {
+					grid.Set(t.x, t.y, '#')
+				} else if ltail.Add(t) {
+					last := ltail.Last()
+					grid.Set(last.x, last.y, '#')
 
-                                        fmt.Println("last", last)
-                                }
+					fmt.Println("last", last)
+				}
 
 			}
 
-                        grid.Print()
+			grid.Print()
 		}
 
 		fmt.Println("part", part, "total:", grid.Count('#'))
