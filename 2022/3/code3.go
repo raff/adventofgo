@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./advlib"
+	"github.com/raff/adventofgo/advlib"
 )
 
 func find(c1, c2 string) (rune, int) {

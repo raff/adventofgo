@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./advlib"
+	"github.com/raff/adventofgo/advlib"
 )
 
 func fullOverlap(line string) bool {

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./advlib"
+	"github.com/raff/adventofgo/advlib"
 )
 
 func marker(s string, n int) int {

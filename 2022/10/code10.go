@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"./advlib"
+	"github.com/raff/adventofgo/advlib"
 )
 
 type OpFunc func(old uint64) uint64
