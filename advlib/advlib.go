@@ -112,6 +112,10 @@ func Join(parts []string, sep string) string {
 	return strings.Join(parts, sep)
 }
 
+func Trim(s, cut string) string {
+	return strings.Trim(s, cut)
+}
+
 func StartsWith(s, start string) bool {
 	return strings.HasPrefix(s, start)
 }
