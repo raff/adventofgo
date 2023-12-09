@@ -108,13 +108,17 @@ func SplitSep(s, sep string) []string {
 	return strings.Split(s, sep)
 }
 
-func Join(parts []string, sep string) string {
-	return strings.Join(parts, sep)
-}
+var Join = strings.Join
 
-func Trim(s, cut string) string {
-	return strings.Trim(s, cut)
-}
+//func Join(parts []string, sep string) string {
+//	return strings.Join(parts, sep)
+//}
+
+var Trim = strings.Trim
+
+//func Trim(s, cut string) string {
+//	return strings.Trim(s, cut)
+//}
 
 func StartsWith(s, start string) bool {
 	return strings.HasPrefix(s, start)
@@ -127,3 +131,7 @@ func EndsWith(s, end string) bool {
 func ContainsChar(s string, c rune) bool {
 	return strings.Contains(s, string(c))
 }
+
+var Println = fmt.Println
+
+var Printf = fmt.Printf

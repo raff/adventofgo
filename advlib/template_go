@@ -1,20 +1,20 @@
 package main
 
-import (
-        "fmt"
-
-        . "github.com/raff/adventofgo/advlib"
-)
+import . "github.com/raff/adventofgo/advlib"
 
 func main() {
 	r := NewReader()
         lines, _ := r.Readlines()
 
+	if Part1 {
+                Println("part 1")
+	}
+
         if Part2 {
-                fmt.Println("part 2")
+                Println("part 2")
         }
 
 	for _, line := range lines {
-		fmt.Println(Split(line))
+		Printf("%q\n", Split(line))
 	}
 }
